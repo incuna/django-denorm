@@ -2,6 +2,23 @@
 Tutorial
 ========
 
+First steps
+===========
+
+You must add denorm app to your INSTALLED_APPS within your settings.py::
+
+
+    INSTALLED_APPS = (
+        ...
+        'denorm',
+        ...
+    )
+
+
+You also need to run the initial migration for denorm app::
+
+    $ python manage.py migrate denorm
+
 Counting related objects
 ========================
 
@@ -22,7 +39,7 @@ To calculate the number of pictures in a gallery, we would normally have a Djang
     gallery = Gallery.objects.get(...)
     number_of_pictures = gallery.picture_set.count()
 
-However, this code will result in a COUNT query on the database for every tiem the page is viewed.
+However, this code will result in a COUNT query on the database for every time the page is viewed.
 
 To speed this up we can cache the number of pictures inside the gallery::
 
@@ -66,6 +83,8 @@ Example::
 
 in this example ``SomeModel`` will have a ``CharField`` named ``some_computation``.
 
+**Note:** You must add the column in the DB yourself (either manually or through a south migration) since 
+denorm won't perform that operation for you.
 
 Adding dependency information
 -----------------------------

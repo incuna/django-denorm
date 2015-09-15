@@ -12,8 +12,8 @@ class Command(NoArgsCommand):
             default=DEFAULT_DB_ALIAS, help='Nominates a database to execute '
                 'SQL into. Defaults to the "default" database.'),
     )
-    help = "Creates all triggers needed by django-denorm."
+    help = "Removes all triggers created by django-denorm."
 
     def handle_noargs(self, **options):
         using = options['database']
-        denorms.install_triggers(using=using)
+        denorms.drop_triggers(using=using)
